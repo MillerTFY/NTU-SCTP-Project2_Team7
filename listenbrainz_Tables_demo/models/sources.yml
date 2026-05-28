@@ -1,0 +1,8 @@
+version: 2
+
+sources:
+  - name: listenbrainz_raw
+    database: ntu-sctp-project-2026-may
+    schema: raw_listenbrainz
+    tables:
+      - name: listen
