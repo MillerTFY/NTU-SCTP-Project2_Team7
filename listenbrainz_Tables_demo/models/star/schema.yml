@@ -1,0 +1,42 @@
+version: 2
+
+models:
+  - name: dim_user
+    description: "User dimension"
+    columns:
+      - name: user_name
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_artist
+    description: "Artist dimension"
+    columns:
+      - name: artist_msid
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_track
+    description: "Track dimension from snapshot"
+    columns:
+      - name: recording_msid
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_release
+    description: "Release dimension"
+    columns:
+      - name: release_msid
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_date
+    description: "Date dimension"
+    columns:
+      - name: date_key
+        tests:
+          - unique
+          - not_null

@@ -1,0 +1,37 @@
+version: 2
+
+models:
+  - name: fact_listens
+    description: "Fact table for listen events"
+    columns:
+      - name: listened_at
+        tests:
+          - not_null
+      - name: user_name
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                field: user_name
+                to: ref('dim_user')
+      - name: recording_msid
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                field: recording_msid
+                to: ref('dim_track')
+      - name: artist_msid
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                field: artist_msid
+                to: ref('dim_artist')
+      - name: release_msid
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                field: release_msid
+                to: ref('dim_release')
