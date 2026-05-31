@@ -9,15 +9,17 @@
     )
 }}
 
-SELECT DISTINCT
+SELECT
     recording_msid,
     track_name,
     artist_msid,
-    artist_name,
     release_msid,
-    release_name,
     listened_at
 FROM {{ source('listenbrainz_raw', 'listen') }}
 WHERE recording_msid IS NOT NULL
+QUALIFY ROW_NUMBER() OVER (
+    PARTITION BY recording_msid
+    ORDER BY listened_at DESC
+) = 1
 
 {% endsnapshot %}
