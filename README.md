@@ -37,4 +37,4 @@ Go to: WSL: /home/<wsl_username>/.dbt/profiles.yml. Copy the austin_bikeshare_de
 
 ## ELT Pipeline 
 
-![alt text](image.png)
+![alt text](image-1.png)
