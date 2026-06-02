@@ -1,6 +1,15 @@
 # Referring to Project Brief
 https://console.cloud.google.com/marketplace/product/metabrainz/listenbrainz
 
+## Data Ingestion
+Basic Data Profiling Checks
+1. Row Count & Sample
+2. NULL Checks
+3. Duplicate Checks
+4. Date Range Check
+5. NULL % per Column (Overall Health Score)
+
+
 ## Data Warehouse Design 
 
 ### Source data:  

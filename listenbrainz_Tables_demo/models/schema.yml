@@ -3,10 +3,20 @@ version: 2
 models:
   - name: fact_listens
     description: "Fact table for listen events"
+    tests:
+      - dbt_expectations.expect_table_row_count_to_be_between:
+          min_value: 100000000
+          max_value: 200000000
+          config:
+            severity: error
+            description: >
+              fact_listens must contain 100M-200M rows.
+              Deviation indicates pipeline failure or data loss.
     columns:
       - name: listened_at
         tests:
           - not_null
+
       - name: user_name
         tests:
           - not_null
@@ -14,6 +24,7 @@ models:
               arguments:
                 field: user_name
                 to: ref('dim_user')
+
       - name: recording_msid
         tests:
           - not_null
@@ -21,6 +32,7 @@ models:
               arguments:
                 field: recording_msid
                 to: ref('dim_track')
+
       - name: artist_msid
         tests:
           - not_null
@@ -28,6 +40,7 @@ models:
               arguments:
                 field: artist_msid
                 to: ref('dim_artist')
+
       - name: release_msid
         tests:
           - not_null
@@ -35,3 +48,33 @@ models:
               arguments:
                 field: release_msid
                 to: ref('dim_release')
+
+      - name: listen_hour
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+              max_value: 23
+              config:
+                severity: error
+                description: >
+                  listen_hour must be 0-23.
+                  Used for peak hours analysis for CMO content strategy.
+
+      - name: time_of_day
+        tests:
+          - dbt_expectations.expect_column_values_to_be_in_set:
+              value_set: ['Morning', 'Afternoon', 'Evening', 'Night']
+              config:
+                severity: error
+                description: >
+                  Validates time-of-day segments for CMO audience targeting.
+
+      - name: listen_year
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 2000
+              max_value: 2018
+              config:
+                severity: warn
+                description: >
+                  All listens should fall between 2000-2018 after epoch filter.
