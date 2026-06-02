@@ -29,10 +29,27 @@ clean-targets:         # directories to be removed by `dbt clean`
 # In this example config, we tell dbt to build all models in the example/
 # directory as views. These settings can be overridden in the individual model
 # files using the `{{ config(...) }}` macro.
+# STEP 2:
+# models:
+#   listenbrainz_Tables_demo:
+#     # Config indicated by + and applies to all files under models/example/
+#       +materialized: view
+#       star:
+#         +materialized: table
+#         +schema: star
+
+## STEP 3
 models:
   listenbrainz_Tables_demo:
     # Config indicated by + and applies to all files under models/example/
       +materialized: view
+      staging:
+        +materialized: view
+        +schema: staging
       star:
         +materialized: table
         +schema: star
+
+# ✅ ADD THIS AT THE BOTTOM
+vars:
+  'dbt_date:time_zone': 'UTC'
