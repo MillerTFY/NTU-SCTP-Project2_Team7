@@ -2,13 +2,16 @@
 https://console.cloud.google.com/marketplace/product/metabrainz/listenbrainz
 
 ## Data Ingestion
-Basic Data Profiling Checks
+Checking data quality during ingestion is considered best practice and also directly supports Step 4 (Data Quality Testing) later.
+
+Basic Data Profiling Checks.
 1. Row Count & Sample
 2. NULL Checks
 3. Duplicate Checks
 4. Date Range Check
 5. NULL % per Column (Overall Health Score)
 
+![alt text](image-2.png)
 
 ## Data Warehouse Design 
 
