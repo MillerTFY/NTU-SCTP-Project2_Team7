@@ -1,7 +1,6 @@
 version: 2
 
 models:
-
   - name: dim_user
     description: "User dimension"
     columns:
@@ -22,8 +21,6 @@ models:
           - dbt_expectations.expect_column_values_to_not_be_null:
               config:
                 severity: warn
-                description: >
-                  Null artist names corrupt top-artist charts.
 
   - name: dim_track
     description: "Track dimension from snapshot"
@@ -48,9 +45,28 @@ models:
         tests:
           - unique
           - not_null
+          # dbt_utils: date range check (lesson pattern)
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: "'2000-01-01'"
+                max_value: "'2018-12-31'"
+                severity: warn
 
   - name: fct_user_metrics
     description: "User engagement metrics"
+    tests:
+      # dbt_utils: business logic — avg must be positive
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "avg_listens_per_day > 0"
+            severity: error
+
+      # dbt_utils: business logic — total must be >= active days
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "total_listens >= active_listening_days"
+            severity: error
+
     columns:
       - name: user_name
         tests:
@@ -64,8 +80,6 @@ models:
               max_value: 500000
               config:
                 severity: warn
-                description: >
-                  Users above 500k listens are outliers.
       - name: avg_listens_per_day
         tests:
           - not_null
@@ -74,13 +88,9 @@ models:
               max_value: 100
               config:
                 severity: warn
-                description: >
-                  Platform average engagement KPI for CEO presentation.
       - name: preferred_time_of_day
         tests:
           - dbt_expectations.expect_column_values_to_be_in_set:
               value_set: ['Morning', 'Afternoon', 'Evening', 'Night']
               config:
                 severity: error
-                description: >
-                  Validates CMO audience time-of-day segments.
