@@ -3,7 +3,14 @@ version: 2
 models:
   - name: fact_listens
     description: "Fact table for listen events"
+<<<<<<< HEAD
     tests:
+=======
+
+    # ── Table-level tests ───────────────────────────────────
+    tests:
+      # dbt-expectations: row count check
+>>>>>>> refs/remotes/origin/main
       - dbt_expectations.expect_table_row_count_to_be_between:
           min_value: 100000000
           max_value: 200000000
@@ -11,7 +18,28 @@ models:
             severity: error
             description: >
               fact_listens must contain 100M-200M rows.
-              Deviation indicates pipeline failure or data loss.
+=======
+
+      # dbt_utils: business logic — listen_year must match
+      # the year extracted from listened_at (derived column check)
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "listen_year = EXTRACT(YEAR FROM listened_at)"
+            severity: error
+
+      # dbt_utils: business logic — listen_month must be 1-12
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "listen_month BETWEEN 1 AND 12"
+            severity: error
+
+      # dbt_utils: business logic — listen_hour must be 0-23
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "listen_hour BETWEEN 0 AND 23"
+            severity: error
+
+>>>>>>> refs/remotes/origin/main
     columns:
       - name: listened_at
         tests:
@@ -51,14 +79,23 @@ models:
 
       - name: listen_hour
         tests:
+=======
+          # dbt-expectations: column range
+>>>>>>> refs/remotes/origin/main
           - dbt_expectations.expect_column_values_to_be_between:
               min_value: 0
               max_value: 23
               config:
                 severity: error
-                description: >
-                  listen_hour must be 0-23.
-                  Used for peak hours analysis for CMO content strategy.
+=======
+
+          # dbt_utils: column type check (NEW from lesson)
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                max_value: 23
+                severity: warn
+>>>>>>> refs/remotes/origin/main
 
       - name: time_of_day
         tests:
@@ -66,8 +103,8 @@ models:
               value_set: ['Morning', 'Afternoon', 'Evening', 'Night']
               config:
                 severity: error
-                description: >
-                  Validates time-of-day segments for CMO audience targeting.
+=======
+>>>>>>> refs/remotes/origin/main
 
       - name: listen_year
         tests:
@@ -76,5 +113,12 @@ models:
               max_value: 2018
               config:
                 severity: warn
-                description: >
-                  All listens should fall between 2000-2018 after epoch filter.
+=======
+
+          # dbt_utils: accepted_range equivalent (lesson pattern)
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 2000
+                max_value: 2018
+                severity: warn
+>>>>>>> refs/remotes/origin/main

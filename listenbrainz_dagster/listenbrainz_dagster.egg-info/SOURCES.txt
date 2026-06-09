@@ -1,0 +1,8 @@
+pyproject.toml
+setup.cfg
+setup.py
+listenbrainz_dagster.egg-info/PKG-INFO
+listenbrainz_dagster.egg-info/SOURCES.txt
+listenbrainz_dagster.egg-info/dependency_links.txt
+listenbrainz_dagster.egg-info/requires.txt
+listenbrainz_dagster.egg-info/top_level.txt
