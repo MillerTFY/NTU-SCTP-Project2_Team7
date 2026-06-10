@@ -1,3 +1,29 @@
+# 🎧 ListenBrainz End-to-End Data Engineering Pipeline | NTU SCTP Module 2
+
+Built a production-grade data pipeline processing 130 million music listening events from the ListenBrainz public dataset — covering the full data engineering lifecycle from raw ingestion to executive dashboard.
+What we built:
+
+Ingestion — Direct BigQuery public dataset integration, no data transfer costs
+ELT Pipeline — dbt Bronze → Silver → Gold star schema with SCD Type 2 snapshots
+Data Quality — 39 automated tests combining dbt core, dbt_utils, and dbt-expectations
+Python Analysis — DuckDB + Polars out-of-core processing on 130M rows
+Orchestration — Dagster pipeline with weekly automated scheduling
+Dashboard — Streamlit app deployed on Google Cloud Run
+
+Key findings delivered to stakeholders:
+
+Identified 31 power users driving disproportionate platform engagement
+Radiohead, The Beatles, and Pink Floyd dominate the listen catalogue
+Evening (18:00–21:00) accounts for 31% of all platform activity
+Regular users represent 52.6% of total listen volume
+
+Tech stack: BigQuery · dbt · Dagster · DuckDB · Polars · Pandas · Streamlit · Cloud Run · Python · SQL
+
+Team 7 — NTU SCTP Data Engineering Programme, Module 2
+
+
+
+
 # Referring to Project Brief
 https://console.cloud.google.com/marketplace/product/metabrainz/listenbrainz
 
