@@ -39,7 +39,7 @@ Basic Data Profiling Checks.
 
 =======
 ![Data_Table](./Notebook/output/image-2.png)
->>>>>>> refs/remotes/origin/main
+
 
 ## Data Warehouse Design 
 
@@ -68,8 +68,5 @@ Go to: WSL: /home/<wsl_username>/.dbt/profiles.yml. Copy the austin_bikeshare_de
 
 ## ELT Pipeline 
 
-<<<<<<< HEAD
-![alt text](image-1.png)
-=======
+
 ![Pipeline architecture](/Notebook/output/image-1.png)
->>>>>>> refs/remotes/origin/main
