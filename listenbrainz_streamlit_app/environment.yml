@@ -1,0 +1,18 @@
+
+ame: streamlit_app
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - pandas
+  - pip
+  - pip:
+      - streamlit
+      - plotly
+      - google-cloud-bigquery
+      - sqlalchemy-bigquery
+      - sqlalchemy
+      - db-dtypes
+      - pyarrow
+EOF

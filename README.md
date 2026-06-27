@@ -43,8 +43,6 @@ Basic Data Profiling Checks.
 
 ## Data Warehouse Design 
 
-### Source data:  
-- Use any “ingestion” method to ingest the data. Topic refer to 2.5 
 
 ### Step 1:Authenticate GCP by running, a one time set up: "gcloud auth application-default login" @ Terminal
 ### Step 2:conda activate elt
@@ -65,6 +63,9 @@ Go to: WSL: /home/<wsl_username>/.dbt/profiles.yml. Copy the austin_bikeshare_de
 - dbt snapshot --> creates track_snapshot first
 - dbt run --> builds all dimension and fact tables
 - dbt test --> validates data quality
+
+### Source data:  
+- Use any “” method to ingest the data. Topic refer to 2.6, 2.7, 2.8 
 
 ## ELT Pipeline 
 
